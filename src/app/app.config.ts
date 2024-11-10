@@ -4,6 +4,11 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { requestAngular17Interceptor } from '../../auth/request-angular17.interceptor';
+
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration()]
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(withInterceptors([requestAngular17Interceptor])),]
 };
