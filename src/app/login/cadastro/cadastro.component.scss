@@ -1,0 +1,13 @@
+.pombo:hover{
+  transform: scale(1.4);
+  box-shadow: 0 0 20px rgba(252, 247, 0, 0.5);
+  transition: transform 0.2s ease, transform 0.5s ease 0.2s;
+}
+.fundoPombo{
+  background-image: url('/assets/images/wallpaper.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: left left ;
+  background-color: #f0f0f0;
+  padding-inline-start: 30%;
+}

@@ -5,7 +5,7 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { requestAngular17Interceptor } from '../../auth/request-angular17.interceptor';
+import { requestAngular17Interceptor } from './auth/request-angular17.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [

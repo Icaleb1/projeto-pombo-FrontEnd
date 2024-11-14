@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login/login.component';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { RequestInterceptor } from '../auth/request.interceptor';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +14,12 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     CommonModule,
-    LoginRoutingModule
-  ]
+    LoginRoutingModule,
+    FormsModule,
+    HttpClientModule
+  ],
+  providers:[
+    {provide: HTTP_INTERCEPTORS, useClass:RequestInterceptor, multi: true}
+  ],
 })
 export class LoginModule { }
