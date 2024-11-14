@@ -1,45 +1,31 @@
-<div class="container-fluid g-5">
-    <div class="row text-center p-2 align-items-center justify-content-center">
-      <div class="col col-md-4 pt-5">
-        <div class="card border-dark shadow round">
-          <div class="card-header bg-primary">
-            <h3 class="text-center text-white pt-2">Cadastre-se</h3>
-          </div>
-          <div class="card-body">
-            <form> 
-              <div class="mb-1">
-                <label class="form-label" for="email">E-mail</label>
-                <input type="text" class="form-control border-dark" name="email" required/>
-                <div class="invalid-feedback"> Informe o email.</div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label" for="senha">Senha</label>
-                <input type="password" class="form-control border-dark" name="senha" required>
-                <div class="invalid-feedback"> Informe a senha.</div>
-              </div>
-              <div class="mb-3 text-center">
-                <a href="#" class="text-primary">Esqueci minha senha</a>
-              </div>
-              <div class="text-center">
-                <button type="button" class="btn btn-primary border-dark" >
-                  Entrar
-                </button>
-                <div class="pt-3">
-                  <span class="align-items-start">
-                    <p class="text-primary">OU</p>
-                  </span>
-                </div>
-                <div>
-                  <span class="align-items-start">
-                    <button type="button" class="btn btn-warning border-dark">
-                      Cadastre-se
-                    </button>
-                  </span>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow-lg" style="width: 20rem;">
+    <h3 class="text-center mb-4">Cadastre-se</h3>
+    <form>
+      <div class="form-group mb-3">
+        <label for="name" class="form-label"><strong>Nome:</strong></label>
+        <input id="name" formControlName="name" type="text" class="form-control" placeholder="Digite seu nome"/>
       </div>
+      <div class="form-group mb-3">
+        <label for="email" class="form-label"><strong>Email:</strong></label>
+        <input id="email" formControlName="email" type="email" class="form-control" placeholder="Digite seu email"/>
+      </div>
+      <div class="form-group mb-3">
+        <label for="dob" class="form-label"><strong>Data de Nascimento:</strong></label>
+        <input id="dob" formControlName="dob" type="date" class="form-control"/>
+      </div>
+      <div class="form-group mb-3">
+        <label for="cpf" class="form-label"><strong>CPF:</strong></label>
+        <input id="cpf" formControlName="cpf" type="text" class="form-control" placeholder="Digite seu CPF"/>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary btn-sm rounded-pill px-4 shadow">
+          <strong>Cadastrar</strong>
+        </button>
+      </div>
+    </form>
+    <div class="text-center mt-3">
+      <p>Já possui uma conta? <a href="/login" class="text-primary">Faça login</a></p>
     </div>
   </div>
+</div>
