@@ -34,7 +34,7 @@ export class CadastroComponent {
     );
   }
   voltar() {
-    this.router.navigate(['']);
+    this.router.navigate(['/home']);
   }
 
 }

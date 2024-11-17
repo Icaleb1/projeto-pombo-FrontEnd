@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login/login.component';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
-import { RequestInterceptor } from '../auth/request.interceptor';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { requestAngular17Interceptor } from '../auth/request-angular17.interceptor';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -16,10 +18,12 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     LoginRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule,
+    RouterModule
   ],
   providers:[
-    {provide: HTTP_INTERCEPTORS, useClass:RequestInterceptor, multi: true}
+    provideHttpClient(withInterceptors([requestAngular17Interceptor]))
   ],
 })
 export class LoginModule { }

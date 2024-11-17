@@ -2,33 +2,33 @@ import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
-//import { LoginServiceService } from '../shared/service/login/login-service.service';
 
 export const requestAngular17Interceptor: HttpInterceptorFn = (req, next) => {
-
+  const router = inject(Router);
   let authReq = req;
 
-  if (typeof window !== 'undefined' && window.localStorage) {
-    const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
-    if (usuarioAutenticado) {
-      const usuario = JSON.parse(usuarioAutenticado);
+  if (typeof localStorage !== 'undefined') {
+    const tokenUsuarioAutenticado = localStorage.getItem('usuarioAutenticado');
+    if (tokenUsuarioAutenticado) {
       authReq = req.clone({
-        setHeaders: { idSessao: usuario.idSessao }
+        setHeaders: {
+          Authorization: `Bearer ${tokenUsuarioAutenticado}`
+        },
       });
     }
   }
 
+  // Lida com erros de autenticação e outros problemas
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
-      // const router = inject(Router);
-      // const loginService = inject(LoginServiceService);
-      // if (error.status === 401 || error.status === 403) {
-      //   loginService.sair();
-      //   router.navigate(['/login']);
-      // }
-      return throwError(error);
+      if (error.status === 401 || error.status === 403) {
+        // Exemplo: remove credenciais inválidas e redireciona
+        if (typeof localStorage !== 'undefined') {
+          localStorage.removeItem('usuarioAutenticado');
+        }
+        router.navigate(['/login']); // Redireciona para a página de login
+      }
+      return throwError(() => error); // Retorna o erro para o chamador
     })
   );
-
-  // return next(req);
 };

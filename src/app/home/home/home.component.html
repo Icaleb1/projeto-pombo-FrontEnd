@@ -16,22 +16,31 @@
       </div>
       <a class="navbar-brand d-flex align-items-center" href="#">
         <span class="fw-bold text-dark">Perfil Usuário</span>
-        <img src="assets/images/" alt="Logo Perfil Usuário" width="60" height="60" class="rounded-circle ms-2">
+        <img src="assets/images/Pru.png" alt="Logo Perfil Usuário" width="60" height="60" class="rounded-circle ms-2">
       </a>
     </div>
   </nav>
-  <div class="d-flex justify-content-center mt-5">
+  <div class="d-flex justify-content-center mt-5" *ngFor="let pruu of pruus; trackBy: trackPruu">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 col-sm-6 col-md-4">
           <div class="card shadow-lg border-light p-3">
-            <img src="assets/images/Pru.png" class="card-img-top " alt="Imagem do post">
+            <div class="d-flex align-items-center mb-3">
+              <!-- Usando as propriedades do Pruu -->
+              <img src="assets/images/Pru.png" alt="Imagem de Perfil" width="40" height="40" class="rounded-circle me-3">
+              <div>
+                <span class="fw-bold d-block">{{ pruu.usuario.nome }}</span>
+                <small class="text-muted">{{ pruu.dataHoraCriacao | date:'dd/MM/yyyy' }}</small>
+              </div>
+            </div>
+
+            <img src="assets/images/Pru.png" class="card-img-top rounded" alt="Imagem do post">
             <div class="card-body">
-              <h5 class="card-title text-dark">Título</h5>
-              <p class="card-text">Descrição</p>
+              <p class="card-text mt-2">{{ pruu.texto }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+

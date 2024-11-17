@@ -12,9 +12,7 @@ const routes: Routes = [
   {
     path: "cadastro", component: CadastroComponent
   },
-  {
-    path: 'home', component: HomeComponent
-  }
+
 ];
 
 @NgModule({
