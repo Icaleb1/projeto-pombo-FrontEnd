@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { UsuarioDTO } from "../model/dto/Usuario_dto";
 import { Observable } from "rxjs";
+import { Usuario } from "../model/Usuario";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,11 @@ export class LoginService {
       observe: 'response',
       responseType: 'text' as 'json'
     });
+  }
+
+  cadastrar(usuario: Usuario): Observable<any>{
+    return this.httpCliente.post<any>(this.API, usuario);
+
   }
 
   sair() {

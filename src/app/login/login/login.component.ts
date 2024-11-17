@@ -1,3 +1,4 @@
+import { Usuario } from './../../shared/model/Usuario';
 import { dirname } from 'node:path';
 import { UsuarioDTO } from './../../shared/model/dto/Usuario_dto';
 import { LoginService } from './../../shared/service/Login_service';
@@ -13,17 +14,18 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
 
+  public usuario: Usuario = new Usuario();
+  public idUsuario: number;
+
   public dto: UsuarioDTO = new UsuarioDTO();
 
   constructor(
+              private service: LoginService,
               private router: Router,
-              private LoginService: LoginService
-            ){
-
-  }
+            ){}
 
   public realizarLogin(){
-    this.LoginService.autenticar(this.dto).subscribe({
+    this.service.autenticar(this.dto).subscribe({
       next: jwt => {
         Swal.fire('Sucesso', 'Usuário autenticado com sucesso', 'success');
         let token: string = jwt.body + "";
@@ -43,7 +45,7 @@ export class LoginComponent {
     });
   }
 
-  public cadastro(){
-    this.router.navigate(['/cadastro/']);
+  voltar() {
+    this.router.navigate(['']);
   }
 }

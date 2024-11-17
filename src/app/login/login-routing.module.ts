@@ -10,12 +10,10 @@ const routes: Routes = [
     path: '', component: LoginComponent
   },
   {
-    path: 'cadastro', component: CadastroComponent
-  }
-  ,
+    path: "cadastro", component: CadastroComponent
+  },
   {
     path: 'home', component: HomeComponent
-
   }
 ];
 
