@@ -10,24 +10,30 @@
         <img src="assets/images/Pru.png" alt="Image do sistema Pru" class="rounded-circle mb-4 pombo" style="width: 80px; height: 80px; object-fit: cover;">
       </div>
       <h3 class="text-center mb-4">Cadastre-se</h3>
-      <form #ngForm="">
+      <form #ngForm="ngForm">
         <div class="form-group mb-3">
           <label for="name" class="form-label"><strong>Nome:</strong></label>
-          <input id="name" formControlName="name" type="text" class="form-control" placeholder="Digite seu nome"/>
-
-
+          <input
+          [ngClass]="(!usuario.nome && ngForm.dirty) ? 'form-control is-invalid' : 'form-control'"
+          [(ngModel)]="usuario.nome" type="text" class="form-control border-dark" name="name" placeholder="Digite seu nome" required/>
         </div>
         <div class="form-group mb-3">
           <label for="email" class="form-label"><strong>Email:</strong></label>
-          <input id="email" formControlName="email" type="email" class="form-control" placeholder="Digite seu email"/>
+          <input
+          [ngClass]="(!usuario.email && ngForm.dirty) ? 'form-control is-invalid' : 'form-control'"
+          [(ngModel)]="usuario.email" type="email" class="form-control border-dark" name="email" placeholder="Digite seu email" required/>
         </div>
         <div class="form-group mb-3">
-          <label for="dob" class="form-label"><strong>Data de Nascimento:</strong></label>
-          <input id="dob" formControlName="dob" type="date" class="form-control"/>
+          <label for="dob" class="form-label"><strong>senha:</strong></label>
+          <input
+          [ngClass]="(!usuario.senha && ngForm.dirty) ? 'form-control is-invalid' : 'form-control'"
+          [(ngModel)]="usuario.senha" type="password" class="form-control border-dark" name="password" placeholder="Digite sua senha" required/>
         </div>
         <div class="form-group mb-3">
           <label for="cpf" class="form-label"><strong>CPF:</strong></label>
-          <input id="cpf" formControlName="cpf" type="text" class="form-control" placeholder="Digite seu CPF"/>
+          <input
+          [ngClass]="(!usuario.cpf && ngForm.dirty) ? 'form-control is-invalid' : 'form-control'"
+          [(ngModel)]="usuario.cpf" type="text" class="form-control border-dark" name="cpf" placeholder="Digite seu cpf" required/>
         </div>
         <div class="d-flex justify-content-center">
           <button type="submit" class="btn btn-warning btn-sm rounded-pill px-4 shadow">

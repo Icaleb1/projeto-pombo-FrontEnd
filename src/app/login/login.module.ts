@@ -6,16 +6,17 @@ import { LoginComponent } from './login/login.component';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { requestAngular17Interceptor } from '../auth/request-angular17.interceptor';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { CadastroComponent } from './cadastro/cadastro.component';
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    CadastroComponent,
+
   ],
   imports: [
-    CommonModule,
     LoginRoutingModule,
     FormsModule,
     HttpClientModule,
