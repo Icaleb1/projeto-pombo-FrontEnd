@@ -26,7 +26,7 @@ export class LoginService {
   }
 
   cadastrar(usuario: Usuario): Observable<any>{
-    return this.httpCliente.post<any>(this.API, usuario);
+    return this.httpCliente.post<any>(this.API+"/novo-usuario", usuario);
 
   }
 
