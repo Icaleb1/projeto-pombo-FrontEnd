@@ -1,26 +1,59 @@
-<body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center" href="#">
         <img src="assets/images/Pru.png" alt="Logo" width="60" height="60" class="rounded-circle me-2">
         <span class="fw-bold text-dark">Pruu</span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Início</a>
-          </li>
-        </ul>
+
+      <div class="position-relative mx-auto">
+        <div class="input-group">
+          <input type="text" id="text" class="form-control"
+                name="text" [(ngModel)]="seletor.nomeUsuario"
+                placeholder="Digite um nome..."/>
+          <button
+            class="btn btn-outline-primary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Filtros
+          </button>
+          <ul class="dropdown-menu p-3" style="min-width: 300px;">
+            <li class="mb-2">
+              <label for="startDate" class="form-label">Data Inicial</label>
+              <input type="date" id="date" class="form-control"
+                name="date" [(ngModel)]="seletor.dataInicioCriacao">
+            </li>
+            <li class="mb-2">
+              <label for="endDate" class="form-label">Data Final</label>
+              <input type="date" id="date" class="form-control"
+                name="date" [(ngModel)]="seletor.dataFimCriacao">
+            </li>
+            <li class="mb-2">
+              <label for="textFilter" class="form-label">Texto</label>
+              <input type="text" id="text" class="form-control"
+                name="text" [(ngModel)]="seletor.texto"
+                placeholder="Digite algo..."/>
+            </li>
+            <li class="d-flex justify-content-between mt-1">
+              <button type="button" class="btn btn-secondary ms-2" name="btnLimpar" (click)="limpar()">
+                <i class="bi bi-trash"></i> Limpar
+              </button>
+              <button type="button" class="btn btn-warning" name="btnPesquisar" (click)="pesquisar()">
+                <i class="bi bi-search"></i> Pesquisar
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
-      <a class="navbar-brand d-flex align-items-center" href="#">
+
+      <a class="navbar-brand d-flex align-items-center" href="/home/usuario">
         <span class="fw-bold text-dark">Perfil Usuário</span>
         <img src="assets/images/Pru.png" alt="Logo Perfil Usuário" width="60" height="60" class="rounded-circle ms-2">
       </a>
     </div>
   </nav>
+<body>
 
    <div class="d-flex justify-content-center mt-5 pt-6" >
     <div class="container pt-3">
@@ -53,6 +86,30 @@
           </div>
         </div>
       </div>
+
+      <div>
+        <nav class="row">
+          <div class="col-md-3">
+              <label for="quantidadeRegistros">Quantidade de registros por página:</label>
+              <select class="form-select" [(ngModel)]="seletor.limite" (change)="atualizarPaginacao()">
+                  <option value="3">3</option>
+                  <option value="6">6</option>
+                  <option value="20">20</option>
+              </select>
+          </div>
+          <div class="col-md-6">
+              <label for="quantidadeRegistros">&nbsp;</label>
+              <ul class="pagination">
+                  <li class="page-item"><button [disabled]="seletor.pagina == 1" class="page-link" (click)="voltarPagina()">Anterior</button></li>
+
+                  <li class="page-item" *ngFor="let indice of criarArrayPaginas()" (click)="irParaPagina(indice)"><button class="page-link">{{indice}}</button></li>
+
+                  <li class="page-item"><button [disabled]="seletor.pagina == totalPaginas" class="page-link" (click)="avancarPagina()">Próxima</button></li>
+              </ul>
+          </div>
+      </nav>
+    </div>
+
     </div>
   </div>
 </body>

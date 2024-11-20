@@ -2,6 +2,7 @@ import { Pruu } from './../model/Pruu';
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { Pruu_seletor } from '../model/seletor/pruu_seletor';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,13 @@ export class PruuService {
     return this.httpCliente.get<Array<Pruu>>(this.API);
   }
 
-  public buscarComSeletor(){
+  public buscarComSeletor(seletor: Pruu_seletor): Observable<Array<Pruu>>{
+    return this.httpCliente.post<Array<Pruu>>(this.API + '/filtro', seletor);
 
+  }
+
+  contarPaginas(seletor: Pruu_seletor): Observable<number> {
+    return this.httpCliente.post<number>(this.API + '/total-paginas', seletor);
   }
 
   public publicarPruu(pruu: Pruu):
