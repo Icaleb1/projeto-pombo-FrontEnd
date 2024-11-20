@@ -14,7 +14,7 @@ export class PruuService {
 
 
   public buscarTodos(): Observable<Array<Pruu>>{
-    return this.httpCliente.get<Array<Pruu>>(this.API+"/todos");
+    return this.httpCliente.get<Array<Pruu>>(this.API);
   }
 
   public buscarComSeletor(){

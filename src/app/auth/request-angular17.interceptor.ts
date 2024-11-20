@@ -8,7 +8,7 @@ export const requestAngular17Interceptor: HttpInterceptorFn = (req, next) => {
   let authReq = req;
 
   if (typeof localStorage !== 'undefined') {
-    const tokenUsuarioAutenticado = localStorage.getItem('usuarioAutenticado');
+    const tokenUsuarioAutenticado = localStorage.getItem('tokenUsuarioAutenticado');
     if (tokenUsuarioAutenticado) {
       authReq = req.clone({
         setHeaders: {
@@ -24,9 +24,9 @@ export const requestAngular17Interceptor: HttpInterceptorFn = (req, next) => {
       if (error.status === 401 || error.status === 403) {
         // Exemplo: remove credenciais inválidas e redireciona
         if (typeof localStorage !== 'undefined') {
-          localStorage.removeItem('usuarioAutenticado');
+          localStorage.removeItem('tokenUsuarioAutenticado');
         }
-        router.navigate(['/login']); // Redireciona para a página de login
+        router.navigate(['']); // Redireciona para a página de login
       }
       return throwError(() => error); // Retorna o erro para o chamador
     })
