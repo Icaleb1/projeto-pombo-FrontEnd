@@ -98,4 +98,8 @@ export class HomeComponent  implements OnInit{
       }
     );
   }
+
+  public cadastro(){
+    this.router.navigate(["/home/pru"])
+  }
 }
