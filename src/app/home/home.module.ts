@@ -8,11 +8,15 @@ import { FormsModule } from '@angular/forms';
 import { requestAngular17Interceptor } from '../auth/request-angular17.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { PruCadastroComponent } from './pru-cadastro/pru-cadastro.component';
+
+
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    PruCadastroComponent
   ],
   imports: [
     CommonModule,
