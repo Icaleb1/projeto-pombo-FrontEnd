@@ -67,10 +67,18 @@
           <div class="card-body">
             <p class="card-text mt-2">{{ pruu.texto }}</p>
           </div>
-            <img *ngIf="pruu.imagemBase64" [src]="'data:image/jpeg;base64,' + pruu.imagemBase64" alt="Imagem da Carta"
-            class="img-thumbnail card-img-top rounded">
-            <button (click)="exibirImagemGrande(pruu.imagemBase64)">imagem</button>
+          <img *ngIf="pruu.imagemPruuEmBase64" [src]="'data:image/jpeg;base64,' + pruu.imagemPruuEmBase64" alt="Imagem da Carta"
+          class="img-thumbnail card-img-top rounded"
+          (click)="exibirImagemGrande(pruu.imagemPruuEmBase64)">
+          <div class="d-flex align-items-center pt-2">
 
+            <button class="btn btn-primary me-2">
+              <i class="bi bi-hand-thumbs-up"></i> Curtir
+            </button>
+            <button class="btn btn-danger">
+              <i class="bi bi-exclamation-circle"></i> Denunciar
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -90,10 +98,11 @@
         </div>
       </div>
 
-      <div class="col-md-4 d-flex align-items-center">
+      <div class="col-md-4 d-flex align-items-center pt-2">
         <ul class="pagination justify-content-center mb-0 w-100">
-          <li class="page-item" *ngFor="let indice of criarArrayPaginas()" (click)="irParaPagina(indice)">
-            <button class="page-link btn-warning text-dark">{{indice}}</button>
+          <li class="page-item " *ngFor="let indice of criarArrayPaginas()" (click)="irParaPagina(indice)">
+            <button class="page-link text-dark border-1 border-warning">
+            <strong>{{indice}}</strong></button>
           </li>
         </ul>
       </div>

@@ -7,7 +7,7 @@ export class Pruu{
   bloqueado: boolean;
   quantLikes: number;
   idSessao: string;
-  imagemBase64: string;
+  imagemPruuEmBase64: string;
   usuario: Usuario;
   usuariosQueCurtiram: Array<Usuario>;
   ativo: boolean;

@@ -104,6 +104,8 @@ export class HomeComponent  implements OnInit{
   }
 
   exibirImagemGrande(imagemBase64: string) {
+
+    console.log("123");
     Swal.fire({
       title: 'Imagem do Pruu',
       html: `<img src="data:image/jpg;base64,${imagemBase64}" alt="Imagem do Pruu" style="max-width: 100%; height: auto;">`,
