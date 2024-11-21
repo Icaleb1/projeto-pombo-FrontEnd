@@ -102,4 +102,16 @@ export class HomeComponent  implements OnInit{
   public cadastro(){
     this.router.navigate(["/home/pru"])
   }
+
+  exibirImagemGrande(imagemBase64: string) {
+    Swal.fire({
+      title: 'Imagem do Pruu',
+      html: `<img src="data:image/jpg;base64,${imagemBase64}" alt="Imagem do Pruu" style="max-width: 100%; height: auto;">`,
+      width: '80%',
+      showCloseButton: true,
+      showConfirmButton: false,
+      background: '#fff',
+      padding: '20px'
+    });
+  }
 }

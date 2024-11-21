@@ -13,6 +13,9 @@ export class PruuService {
 
   constructor(private httpCliente: HttpClient) { }
 
+  uploadImagem(pruuId: string, formData: FormData): Observable<any> {
+    return this.httpCliente.post(`${this.API}/${pruuId}/upload`, formData);
+  }
 
   public buscarTodos(): Observable<Array<Pruu>>{
     return this.httpCliente.get<Array<Pruu>>(this.API);
@@ -37,12 +40,12 @@ export class PruuService {
     return this.httpCliente.put<any>(this.API + "/atualizar", pruu);
   }
 
-  public deletarPruuPorId(idPruu: number):
+  public deletarPruuPorId(idPruu: string):
   Observable<any>{
     return this.httpCliente.put<any>(this.API + "/deletar/", idPruu);
   }
 
-  public bloquearPruuPorId(idPruu: number):
+  public bloquearPruuPorId(idPruu: string):
   Observable<any>{
     return this.httpCliente.put<any>(this.API + "/bloquear/", idPruu);
   }

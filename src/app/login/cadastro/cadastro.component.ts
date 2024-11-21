@@ -26,7 +26,8 @@ export class CadastroComponent {
   public cadastrar(){
     this.service.cadastrar(this.usuario).subscribe(
       (resposta) => {
-        Swal.fire('Usuario cadastrado com sucesso!', '', 'success'); this.voltar();
+        Swal.fire('Usuario cadastrado com sucesso!', '', 'success');
+        this.voltar();
       },
       (erro) => {
         Swal.fire('Erro ao cadastrar-se!', erro, 'error');
@@ -34,7 +35,7 @@ export class CadastroComponent {
     );
   }
   voltar() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['']);
   }
 
 }

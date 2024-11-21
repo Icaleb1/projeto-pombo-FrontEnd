@@ -67,7 +67,9 @@
           <div class="card-body">
             <p class="card-text mt-2">{{ pruu.texto }}</p>
           </div>
-          <img src="assets/images/Pru.png" class="card-img-top rounded" alt="Imagem do post">
+            <img *ngIf="pruu.imagemBase64" [src]="'data:image/jpeg;base64,' + pruu.imagemBase64" alt="Imagem da Carta"
+            class="img-thumbnail card-img-top rounded">
+            <button (click)="exibirImagemGrande(pruu.imagemBase64)">imagem</button>
 
         </div>
       </div>
