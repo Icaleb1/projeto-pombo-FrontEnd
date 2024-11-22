@@ -24,7 +24,7 @@
             <input type="text" id="text" class="form-control border-1 border-dark" name="text" [(ngModel)]="seletor.texto" placeholder="Pesquisar Assunto"/>
           </li>
           <li class="d-flex justify-content-between mt-1">
-            <button type="button" class="btn btn-secondary ms-2" name="btnLimpar" (click)="limpar()">
+            <button type="button" class="btn btn-primary ms-2" name="btnLimpar" (click)="limpar()">
               <i class="bi bi-trash"></i><strong>Limpar</strong>
             </button>
             <button type="button" class="btn btn-warning" name="btnPesquisar" (click)="pesquisar()">
@@ -63,18 +63,17 @@
               <span class="fw-bold d-block">{{ pruu.usuario.nome }}</span>
               <small class="text-muted d-block">{{ pruu.dataHoraCriacao | date:'dd/MM/yyyy' }}</small>
             </div>
-            <div>
-              <span class="fw-bold d-block">{{ pruu.quantLikes }}</span>
-            </div>
           </div>
           <div class="card-body">
             <p class="card-text mt-2">{{ pruu.texto }}</p>
           </div>
           <img *ngIf="pruu.imagemPruuEmBase64" [src]="'data:image/jpeg;base64,' + pruu.imagemPruuEmBase64" alt="Imagem da Carta"
-          class="img-thumbnail card-img-top rounded"
+          class="card-img-top rounded"
           (click)="exibirImagemGrande(pruu.imagemPruuEmBase64)">
           <div class="d-flex align-items-center pt-2">
-
+            <div>
+              <span class="fw-bold d-block">{{ pruu.quantLikes }}</span>
+            </div>
             <button class="btn btn-primary me-2" (click)="darLike(pruu.uuid)">
               <i class="bi bi-hand-thumbs-up" ></i> Curtir
             </button>
