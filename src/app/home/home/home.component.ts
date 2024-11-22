@@ -3,6 +3,7 @@ import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { Usuario } from '../../shared/model/Usuario';
 import { Pruu } from '../../shared/model/Pruu';
 import { PruuService } from '../../shared/service/Pruu_service';
+import { UsuarioService } from '../../shared/service/Usuario_service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -25,6 +26,7 @@ export class HomeComponent  implements OnInit{
     private pruuService: PruuService,
     private router: Router,
     private route: ActivatedRoute,
+    private usuarioService: UsuarioService
   ){}
 
   ngOnInit(): void {
@@ -114,6 +116,17 @@ export class HomeComponent  implements OnInit{
       showConfirmButton: false,
       background: '#fff',
       padding: '20px'
+    });
+  }
+
+  darLike(pruuId: string): void {
+    this.usuarioService.curtir(pruuId).subscribe({
+      next: (resposta) => {
+        Swal.fire('Pruu curtido!', '', 'success');
+      },
+      error: (erro) => {
+        Swal.fire('Erro ao curtir: ' + erro.error, '', 'error');
+      },
     });
   }
 }

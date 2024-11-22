@@ -5,14 +5,14 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class PruuService {
+export class UsuarioService {
 
   private readonly API = 'http://localhost:8080/api/usuarios';
 
   constructor(private httpCliente: HttpClient) {}
 
-  contarPaginas(idPruu: string): Observable<any> {
-    return this.httpCliente.post<any>(this.API + '/like/', idPruu);
+  curtir(idPruu: string): Observable<any> {
+    return this.httpCliente.post<any>(`${this.API}/like/${idPruu}`, {} );
   }
 
 
