@@ -6,14 +6,19 @@ import { Denuncia } from "../model/Denuncia";
 @Injectable({
   providedIn: 'root'
 })
-export class PruuService {
+export class DenunciaService {
 
+  //URL BackEnd Local
+  //private readonly API = 'http://localhost:8080/api/denuncias';
+
+  //URL BackEnd Remoto
   private readonly API = 'https://projeto-pombo-backend.onrender.com/api/denuncias';
+
 
   constructor(private httpCliente: HttpClient) {}
 
-  denunciar(denuncia: Denuncia): Observable<any> {
-    return this.httpCliente.post<any>(this.API, denuncia);
+  denunciar(denuncia: Denuncia, idPruu: string): Observable<any> {
+    return this.httpCliente.post<any>(`${this.API}/${idPruu}`,denuncia);
   }
 
 
