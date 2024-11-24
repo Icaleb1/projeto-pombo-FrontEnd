@@ -8,7 +8,7 @@ import { Usuario } from "../model/Usuario";
 })
 export class UsuarioService {
 
-  private readonly API = 'http://localhost:8080/api/usuarios';
+  private readonly API = 'https://projeto-pombo-backend.onrender.com/api/usuarios';
 
   constructor(private httpCliente: HttpClient) {}
 

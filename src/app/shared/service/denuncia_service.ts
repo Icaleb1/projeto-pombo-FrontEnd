@@ -8,7 +8,7 @@ import { Denuncia } from "../model/Denuncia";
 })
 export class PruuService {
 
-  private readonly API = 'http://localhost:8080/api/denuncias';
+  private readonly API = 'https://projeto-pombo-backend.onrender.com/api/denuncias';
 
   constructor(private httpCliente: HttpClient) {}
 
