@@ -48,8 +48,9 @@ export class PerfilUsuarioComponent implements OnInit{
     this.loginService.sair();
     this.router.navigate(['']);
   }
-
-
+  public telaHome(): void{
+    this.router.navigate(['/home']);
+  }
 
 
 }
