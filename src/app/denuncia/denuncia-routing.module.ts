@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { PruCadastroComponent } from './pru-cadastro/pru-cadastro.component';
+import { HomeComponent } from '../home/home/home.component';
+import { PruCadastroComponent } from '../home/pru-cadastro/pru-cadastro.component';
 import { PerfilUsuarioComponent } from '../usuario/perfil-usuario/perfil-usuario.component';
+import { RelatorioComponent } from './relatorio/relatorio.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,9 @@ const routes: Routes = [
   },
   {
     path: 'usuario', component: PerfilUsuarioComponent
+  },
+  {
+    path: 'relatorio', component: RelatorioComponent
   }
 ];
 
@@ -20,4 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule { }
+export class DenunciaRoutingModule {}

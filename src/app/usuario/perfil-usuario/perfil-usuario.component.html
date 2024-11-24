@@ -5,13 +5,17 @@
         <img src="assets/images/Pru.png" alt="Logo" width="60" height="60" class="rounded-circle me-2">
         <span class="fw-bold text-dark">Pruu</span>
       </a>
+      <div class="mt-2 d-flex justify-content-center w-100">
+        <button class="btn btn-warning" (click)="telaRelatorio()" *ngIf="isAdmin">
+          <i class="bi bi-file-earmark-earphones"></i><strong>Relatório de Denúncias</strong>
+        </button>
+      </div>      
       <a class="navbar-brand d-flex align-items-center">
-        <span class="fw-bold text-dark">{{ usuarioAutenticado?.nome || 'Usuário' }}</span>
+        <span class="fw-bold text-dark">{{ usuarioAutenticado?.nome}}</span>
         <img src="assets/images/Pru.png" alt="Logo Perfil Usuário" width="60" height="60" class="rounded-circle ms-2">
       </a>
     </div>
   </nav>
-
   <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card p-4 text-center shadow" style="width: 300px; border-radius: 20px;">
       <div class="position-absolute top-0 start-0 ms-3 mt-3">
@@ -32,7 +36,7 @@
       </div>
       <div class="d-flex flex-column align-items-center">
         <div class="mt-2">
-          <button class="btn btn-warning"><!-- (click)="salvar()"-->
+          <button class="btn btn-warning">
             <i class="bi bi-save"></i><strong> Salvar</strong>
           </button>
         </div>
@@ -42,6 +46,7 @@
           </button>
         </div>
       </div>
+      
       
     </div>
   </div>

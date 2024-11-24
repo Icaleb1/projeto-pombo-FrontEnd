@@ -3,6 +3,7 @@ import { UsuarioService } from './../../shared/service/Usuario_service';
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../shared/model/Usuario';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EnumPerfil } from '../../shared/model/enum/EnumPerfil';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -11,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class PerfilUsuarioComponent implements OnInit{
 
+  public isAdmin: boolean;
   public idUsuarioAutenticado: string;
   public usuarioAutenticado: Usuario;
   public selectedFile: File | null = null;
@@ -37,6 +39,11 @@ export class PerfilUsuarioComponent implements OnInit{
       this.usuarioService.buscarUsuarioPorId(this.idUsuarioAutenticado).subscribe(
         (resultado) => {
           this.usuarioAutenticado = resultado;
+          if(this.usuarioAutenticado.perfil==EnumPerfil.ADMINISTRADOR){
+            this.isAdmin = false;
+          } else {
+            this.isAdmin = true;
+          }
         },
         (erro) => {
           console.error('Erro ao carregar perfil!', erro);
@@ -53,11 +60,13 @@ export class PerfilUsuarioComponent implements OnInit{
   public telaHome(): void{
     this.router.navigate(['/home']);
   }
+  public telaRelatorio(): void{
+    this.router.navigate(['/denuncia/relatorio']);
+  }
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file && file.size <= 10 * 1024 * 1024) {
       this.selectedFile = file;
-
 
       const reader = new FileReader();
       reader.onload = () => {
@@ -70,4 +79,5 @@ export class PerfilUsuarioComponent implements OnInit{
       this.imagePreview = null;
     }
   }
+  
 }

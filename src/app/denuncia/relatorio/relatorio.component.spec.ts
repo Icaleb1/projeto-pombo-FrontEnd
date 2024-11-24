@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PerfilAdmComponent } from './perfil-adm.component';
+import { RelatorioComponent } from './relatorio.component';
 
-describe('PerfilAdmComponent', () => {
-  let component: PerfilAdmComponent;
-  let fixture: ComponentFixture<PerfilAdmComponent>;
+describe('RelatorioComponent', () => {
+  let component: RelatorioComponent;
+  let fixture: ComponentFixture<RelatorioComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PerfilAdmComponent]
+      imports: [RelatorioComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PerfilAdmComponent);
+    fixture = TestBed.createComponent(RelatorioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
