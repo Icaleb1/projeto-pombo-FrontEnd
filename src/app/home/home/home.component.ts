@@ -16,7 +16,7 @@ import { DenunciaService } from '../../shared/service/denuncia_service';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent  implements OnInit{
-  public denuncia: Denuncia;
+  public denuncia: Denuncia = new Denuncia();
   public idUsuarioAutenticado: string;
   public usuarioAutenticado: Usuario;
   public pruus: Array<Pruu> = new Array();
@@ -59,13 +59,13 @@ export class HomeComponent  implements OnInit{
     );
   }
 
-  public denunciar(){
-    this.denunciaService.denunciar(this.denuncia, this.pruu.uuid).subscribe(
+  public denunciar(pruu){
+    this.denunciaService.denunciar(this.denuncia, pruu.uuid).subscribe(
       (resposta) => {
         Swal.fire('Pruu denunciado!', '', 'success');
       },
       (erro) => {
-        Swal.fire('Erro ao salvar o pruu: ' + erro.error, 'error');
+        Swal.fire('Erro ao salvar o denuncia: ' + erro.error, 'error');
       }
     );
   }

@@ -10,10 +10,10 @@ import { Pruu_seletor } from '../model/seletor/pruu_seletor';
 export class PruuService {
 
   //URL BackEnd Local
-  private readonly API = 'http://localhost:8080/api/pruus';
+  //private readonly API = 'http://localhost:8080/api/pruus';
 
   //URL BackEnd Remoto
-  //private readonly API = 'https://projeto-pombo-backend.onrender.com/api/pruus';
+  private readonly API = 'https://projeto-pombo-backend.onrender.com/api/pruus';
 
 
   constructor(private httpCliente: HttpClient) { }
