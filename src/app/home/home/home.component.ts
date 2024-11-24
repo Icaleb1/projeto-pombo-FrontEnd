@@ -104,7 +104,9 @@ export class HomeComponent  implements OnInit{
     this.seletor.pagina--;
     this.pesquisar();
   }
-
+  public telaPerfil(): void{
+    this.router.navigate(['/home/usuario']);
+  }
   criarArrayPaginas(): any[] {
     return Array(this.totalPaginas).fill(0).map((x, i) => i + 1);
   }
