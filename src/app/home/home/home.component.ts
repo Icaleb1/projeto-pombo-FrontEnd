@@ -6,6 +6,7 @@ import { PruuService } from '../../shared/service/Pruu_service';
 import { UsuarioService } from '../../shared/service/Usuario_service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { LoginService } from '../../shared/service/Login_service';
 
 @Component({
   selector: 'app-home',
@@ -14,8 +15,10 @@ import Swal from 'sweetalert2';
 })
 export class HomeComponent  implements OnInit{
 
+  public idUsuarioAutenticado: string;
   public usuarioAutenticado: Usuario;
   public pruus: Array<Pruu> = new Array();
+  public pruu: Pruu;
   track: TrackByFunction<Pruu>;
   trackPruu: TrackByFunction<Pruu>;
   public totalPaginas: number = 0;
@@ -26,7 +29,8 @@ export class HomeComponent  implements OnInit{
     private pruuService: PruuService,
     private router: Router,
     private route: ActivatedRoute,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private loginService: LoginService,
   ){}
 
   ngOnInit(): void {
@@ -34,6 +38,8 @@ export class HomeComponent  implements OnInit{
     this.seletor.pagina = 1;
     this.pesquisar();
     this.contarPaginas();
+    this.buscarUsuarioAutenticado();
+
 
 
   }
@@ -119,14 +125,53 @@ export class HomeComponent  implements OnInit{
     });
   }
 
-  darLike(pruuId: string): void {
-    this.usuarioService.curtir(pruuId).subscribe({
-      next: (resposta) => {
-        Swal.fire('Pruu curtido!', '', 'success');
+ // darLike(pruuId: string): void {
+ //   this.usuarioService.curtir(pruuId).subscribe({
+ //     next: (resposta) => {
+ //       Swal.fire('Pruu curtido!', '', 'success');
+ //     },
+ //     error: (erro) => {
+ //       Swal.fire('Erro ao curtir: ' + erro.error, '', 'error');
+ //     },
+ //   });
+ // }
+
+ darLike(pruu: Pruu): void {
+  this.usuarioService.curtir(pruu.uuid).subscribe(() => {
+    this.recarregarPruu(pruu);
+  });
+}
+
+recarregarPruu(pruu: Pruu): void {
+  this.pruuService.buscarPruuPorId(pruu.uuid).subscribe((pruuAtualizado) => {
+    pruu.usuariosQueCurtiram = pruuAtualizado.usuariosQueCurtiram;
+    pruu.quantLikes = pruuAtualizado.usuariosQueCurtiram?.length || 0;
+
+    const index = this.pruus.findIndex((p) => p.uuid === pruu.uuid);
+    if (index !== -1) {
+      this.pruus[index] = { ...this.pruus[index], ...pruuAtualizado };
+    }
+  });
+}
+
+
+private buscarUsuarioAutenticado(): void {
+
+  this.idUsuarioAutenticado = this.loginService.buscarIdUsuarioComToken();
+
+  if (this.idUsuarioAutenticado) {
+
+    this.usuarioService.buscarUsuarioPorId(this.idUsuarioAutenticado).subscribe(
+      (resultado) => {
+        this.usuarioAutenticado = resultado;
       },
-      error: (erro) => {
-        Swal.fire('Erro ao curtir: ' + erro.error, '', 'error');
-      },
-    });
+      (erro) => {
+        console.error('Erro ao carregar perfil!', erro);
+      }
+    );
+  } else {
+    console.error('Usuário não autenticado ou token inválido.');
   }
+}
+
 }

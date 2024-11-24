@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { UsuarioDTO } from "../model/dto/Usuario_dto";
 import { Observable } from "rxjs";
 import { Usuario } from "../model/Usuario";
+import {jwtDecode}  from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,18 @@ export class LoginService {
 
   }
 
+  buscarIdUsuarioComToken(): string | null {
+    try {
+      const token = localStorage.getItem('tokenUsuarioAutenticado');
+      if (token) {
+        const tokenDecodificado: any = jwtDecode(token);
+        return tokenDecodificado.idUsuario;
+      }
+    } catch (error) {
+      console.error('Erro ao decodificar o token:', error);
+    }
+    return null;
+  }
   sair() {
     localStorage.removeItem('tokenUsuarioAutenticado');
   }

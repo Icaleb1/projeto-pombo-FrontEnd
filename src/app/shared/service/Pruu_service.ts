@@ -50,6 +50,11 @@ export class PruuService {
     return this.httpCliente.put<any>(this.API + "/bloquear/", idPruu);
   }
 
+  public buscarPruuPorId(idPruu: string): Observable<Pruu> {
+    return this.httpCliente.get<Pruu>(`${this.API}/${idPruu}`);
+  }
+
+
 
 
 }

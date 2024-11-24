@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center" href="/home" style="width: 600px">
+    <a class="navbar-brand d-flex align-items-center"  style="width: 600px">
       <img src="assets/images/Pru.png" alt="Logo" width="60" height="60" class="rounded-circle me-2">
       <span class="fw-bold text-dark">Pruu</span>
     </a>
@@ -35,11 +35,13 @@
       </div>
     </div>
 
-    <a class="navbar-brand d-flex align-items-center justify-content-end" href="#" style="width: 600px;">
-      <span class="fw-bold text-dark me-2">Emanuel</span>
-      <img src="assets/images/Pru.png" alt="Logo" width="60" height="60" class="rounded-circle">
-    </a>
+    <a class="navbar-brand d-flex align-items-center justify-content-end" href="/usuario/perfil" style="width: 600px;">
+      <span class="fw-bold text-dark me-2">
+        {{ usuarioAutenticado?.nome || 'Usuário' }}
+      </span>
 
+      <img src="assets/images/Pru.png" alt="Perfil do Usuário" width="60" height="60" class="rounded-circle">
+    </a>
   </div>
 </nav>
 <body>
@@ -70,11 +72,11 @@
           <img *ngIf="pruu.imagemPruuEmBase64" [src]="'data:image/jpeg;base64,' + pruu.imagemPruuEmBase64" alt="Imagem da Carta"
           class="card-img-top rounded"
           (click)="exibirImagemGrande(pruu.imagemPruuEmBase64)">
+          <div>
+            <span class="fw-bold d-block">{{ pruu.quantLikes }} Curtida(s)</span>
+          </div>
           <div class="d-flex align-items-center pt-2">
-            <div>
-              <span class="fw-bold d-block">{{ pruu.quantLikes }}</span>
-            </div>
-            <button class="btn btn-primary me-2" (click)="darLike(pruu.uuid)">
+            <button class="btn btn-primary me-2" (click)="darLike(pruu)">
               <i class="bi bi-hand-thumbs-up" ></i> Curtir
             </button>
             <button class="btn btn-danger">

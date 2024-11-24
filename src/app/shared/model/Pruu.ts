@@ -9,7 +9,7 @@ export class Pruu{
   idSessao: string;
   imagemPruuEmBase64: string;
   usuario: Usuario;
-  usuariosQueCurtiram: Array<Usuario>;
+  usuariosQueCurtiram: Usuario[];
   ativo: boolean;
 
 }
