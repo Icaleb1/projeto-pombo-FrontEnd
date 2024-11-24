@@ -1,17 +1,35 @@
 <body>
-  <pre>{{usuarioAutenticado | json}}</pre>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container-fluid">
-          <a class="navbar-brand d-flex align-items-center" href="/home">
-            <img src="assets/images/Pru.png" alt="Logo" width="60" height="60" class="rounded-circle me-2">
-            <span class="fw-bold text-dark">Pruu</span>
-          </a>
-          <a class="navbar-brand d-flex align-items-center" href="/home/usuario">
-            <span class="fw-bold text-dark">Perfil Usuário</span>
-            <img src="assets/images/Pru.png" alt="Logo Perfil Usuário" width="60" height="60" class="rounded-circle ms-2">
-          </a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="/home">
+        <img src="assets/images/Pru.png" alt="Logo" width="60" height="60" class="rounded-circle me-2">
+        <span class="fw-bold text-dark">Pruu</span>
+      </a>
+      <a class="navbar-brand d-flex align-items-center" href="/home/usuario">
+        <span class="fw-bold text-dark">Perfil Usuário</span>
+        <img src="assets/images/Pru.png" alt="Logo Perfil Usuário" width="60" height="60" class="rounded-circle ms-2">
+      </a>
+    </div>
+  </nav>
+
+  <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 text-center shadow" style="width: 300px; border-radius: 20px;">
+      <div class="mb-3 text-center">
+        <label for="imagem" class="form-label"><strong>Adicionar Foto de Perfil</strong></label>
+        <div class="position-relative">
+          <input type="file" id="imagem" class="form-control-file position-absolute w-100 h-100 opacity-0">
+          <button class="btn btn-light border-1 border-dark rounded-circle p-4" style="width: 125px; height: 125px;">
+            <i class="bi bi-image">
+              <p class="pl-3">Definir</p>
+            </i>
+          </button>
         </div>
-      </nav>
-
-
+      </div>
+      <div class="mt-2">
+        <button class="btn btn-danger" (click)="desconectar()">
+          <i class="bi bi-box-arrow-right"></i><strong>Sair</strong>
+        </button>
+      </div>
+    </div>
+  </div>
 </body>

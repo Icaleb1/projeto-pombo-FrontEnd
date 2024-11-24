@@ -2,6 +2,7 @@ import { LoginService } from './../../shared/service/Login_service';
 import { UsuarioService } from './../../shared/service/Usuario_service';
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../shared/model/Usuario';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -16,6 +17,8 @@ export class PerfilUsuarioComponent implements OnInit{
   constructor(
     private usuarioService: UsuarioService,
     private loginService: LoginService,
+    private router: Router,
+    private route: ActivatedRoute
 
   ){}
 
@@ -41,12 +44,12 @@ export class PerfilUsuarioComponent implements OnInit{
       console.error('Usuário não autenticado ou token inválido.');
     }
   }
+  public desconectar(): void{
+    this.loginService.sair();
+    this.router.navigate(['']);
+  }
+
 
 
 
 }
-
-
-
-
-
