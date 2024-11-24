@@ -9,7 +9,13 @@ import {jwtDecode}  from 'jwt-decode';
   providedIn: 'root'
 })
 export class LoginService {
-  private readonly API = 'https://projeto-pombo-backend.onrender.com/auth';
+
+  //URL BackEnd Local
+  private readonly API = 'http://localhost:8080/auth';
+
+  //URL BackEnd Remoto
+  //private readonly API = 'https://projeto-pombo-backend.onrender.com/auth';
+
 
   constructor(private httpCliente: HttpClient) { }
 
@@ -43,7 +49,7 @@ export class LoginService {
     }
     return null;
   }
-  
+
   sair() {
     localStorage.removeItem('tokenUsuarioAutenticado');
   }

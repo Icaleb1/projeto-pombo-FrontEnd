@@ -1,3 +1,4 @@
+import { Denuncia } from './../../shared/model/Denuncia';
 import { Pruu_seletor } from './../../shared/model/seletor/pruu_seletor';
 import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { Usuario } from '../../shared/model/Usuario';
@@ -7,6 +8,7 @@ import { UsuarioService } from '../../shared/service/Usuario_service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { LoginService } from '../../shared/service/Login_service';
+import { DenunciaService } from '../../shared/service/denuncia_service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +16,7 @@ import { LoginService } from '../../shared/service/Login_service';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent  implements OnInit{
-
+  public denuncia: Denuncia;
   public idUsuarioAutenticado: string;
   public usuarioAutenticado: Usuario;
   public pruus: Array<Pruu> = new Array();
@@ -31,6 +33,8 @@ export class HomeComponent  implements OnInit{
     private route: ActivatedRoute,
     private usuarioService: UsuarioService,
     private loginService: LoginService,
+    private denunciaService: DenunciaService
+
   ){}
 
   ngOnInit(): void {
@@ -54,6 +58,20 @@ export class HomeComponent  implements OnInit{
       }
     );
   }
+
+  public denunciar(){
+    this.denunciaService.denunciar(this.denuncia, this.pruu.uuid).subscribe(
+      (resposta) => {
+        Swal.fire('Pruu denunciado!', '', 'success');
+      },
+      (erro) => {
+        Swal.fire('Erro ao salvar o pruu: ' + erro.error, 'error');
+      }
+    );
+  }
+
+
+
 
   public contarPaginas() {
     this.pruuService.contarPaginas(this.seletor).subscribe(
