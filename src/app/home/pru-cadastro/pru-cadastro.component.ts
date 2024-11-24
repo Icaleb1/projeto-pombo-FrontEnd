@@ -72,7 +72,12 @@ export class PruCadastroComponent {
       }
     });
   }
-
+  public telaHome(): void{
+    this.router.navigate(['/home']);
+  }
+  public telaPerfil(): void{
+    this.router.navigate(['/home/usuario']);
+  }
   voltar(): void {
     this.router.navigate(['/home']);
   }

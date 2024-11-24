@@ -13,6 +13,8 @@ export class PerfilUsuarioComponent implements OnInit{
 
   public idUsuarioAutenticado: string;
   public usuarioAutenticado: Usuario;
+  public selectedFile: File | null = null;
+  public imagePreview: string | ArrayBuffer | null = null;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -51,6 +53,21 @@ export class PerfilUsuarioComponent implements OnInit{
   public telaHome(): void{
     this.router.navigate(['/home']);
   }
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file && file.size <= 10 * 1024 * 1024) {
+      this.selectedFile = file;
 
 
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      alert('Tamanho de arquivo não permitido! Máximo: 10MB.');
+      this.selectedFile = null;
+      this.imagePreview = null;
+    }
+  }
 }

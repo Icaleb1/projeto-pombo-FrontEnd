@@ -44,7 +44,6 @@ export class LoginComponent {
       }
     });
   }
-
   voltar() {
     this.router.navigate(['']);
   }
