@@ -4,6 +4,8 @@ import { HomeComponent } from '../home/home/home.component';
 import { PruCadastroComponent } from '../home/pru-cadastro/pru-cadastro.component';
 import { PerfilUsuarioComponent } from '../usuario/perfil-usuario/perfil-usuario.component';
 import { RelatorioComponent } from './relatorio/relatorio.component';
+import path from 'path';
+import { GerenciarDenunciasComponent } from './gerenciar-denuncias/gerenciar-denuncias.component';
 
 const routes: Routes = [
   {
@@ -17,7 +19,11 @@ const routes: Routes = [
   },
   {
     path: 'relatorio', component: RelatorioComponent
+  },
+  {
+    path: 'gerenciar', component: GerenciarDenunciasComponent
   }
+  
 ];
 
 @NgModule({
