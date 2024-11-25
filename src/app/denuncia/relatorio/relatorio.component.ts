@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from '../../shared/model/Usuario';
 import { LoginService } from '../../shared/service/Login_service';
 import { UsuarioService } from '../../shared/service/Usuario_service';
+import { DenunciaService } from '../../shared/service/denuncia_service';
+import { Denuncia_seletor } from '../../shared/model/seletor/denuncia_seletor';
+import { Denuncia } from '../../shared/model/Denuncia';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-relatorio',
+  standalone: false,
   templateUrl: './relatorio.component.html',
   styleUrl: './relatorio.component.scss'
 })
@@ -13,18 +18,26 @@ export class RelatorioComponent implements OnInit{
 
   public usuarioAutenticado: Usuario;
   public idUsuarioAutenticado: string;
-
+  public seletor: Denuncia_seletor = new Denuncia_seletor();
+  public denuncias: Array<Denuncia> = new Array();
+  public denuncia: Denuncia;
+  track: TrackByFunction<Denuncia>;
+  trackPruu: TrackByFunction<Denuncia>;
+  public totalPaginas: number = 0;
+  public readonly TAMANHO_PAGINA: number = 3;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private loginService: LoginService,
     private usuarioService: UsuarioService,
-    
+    private denunciaService: DenunciaService,
+
   ){}
 
   ngOnInit(): void {
-    
+
     this.buscarUsuarioAutenticado();
+    this.pesquisar();
 
 
 
@@ -42,9 +55,9 @@ export class RelatorioComponent implements OnInit{
   private buscarUsuarioAutenticado(): void {
 
     this.idUsuarioAutenticado = this.loginService.buscarIdUsuarioComToken();
-  
+
     if (this.idUsuarioAutenticado) {
-  
+
       this.usuarioService.buscarUsuarioPorId(this.idUsuarioAutenticado).subscribe(
         (resultado) => {
           this.usuarioAutenticado = resultado;
@@ -57,4 +70,46 @@ export class RelatorioComponent implements OnInit{
       console.error('Usuário não autenticado ou token inválido.');
     }
   }
+
+  public pesquisar() {
+    this.denunciaService.buscarComSeletor(this.seletor).subscribe(
+      resultado => {
+        this.denuncias = resultado;
+      },
+      erro => {
+        Swal.fire('Erro ao consultar denuncias!', erro.error, 'error');
+      }
+    );
+  }
+
+  criarArrayPaginas(): any[] {
+    return Array(this.totalPaginas).fill(0).map((x, i) => i + 1);
+  }
+
+  irParaPagina(indicePagina: number) {
+    this.seletor.pagina = indicePagina;
+    this.pesquisar();
+  }
+
+
+
+
+  public limpar(){
+    this.seletor = new Denuncia_seletor();
+    this.seletor.limite = this.TAMANHO_PAGINA;
+    this.seletor.pagina = 1;
+  }
+
+  
+
+  avancarPagina() {
+    this.seletor.pagina++;
+    this.pesquisar();
+  }
+
+  voltarPagina() {
+    this.seletor.pagina--;
+    this.pesquisar();
+  }
+
 }

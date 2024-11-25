@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pru-cadastro',
+  standalone: false,
   templateUrl: './pru-cadastro.component.html',
   styleUrl: './pru-cadastro.component.scss'
 })

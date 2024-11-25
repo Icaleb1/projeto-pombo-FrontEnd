@@ -8,7 +8,6 @@ export class Usuario{
   senha: string;
   cpf: string;
   perfil: EnumPerfil;
-  idSessao: string;
   imagemBase64: string;
   ativo: boolean;
   pruusCriados: Array<Pruu>;

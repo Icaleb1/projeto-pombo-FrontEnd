@@ -12,6 +12,7 @@ import { DenunciaService } from '../../shared/service/denuncia_service';
 
 @Component({
   selector: 'app-home',
+  standalone: false,
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

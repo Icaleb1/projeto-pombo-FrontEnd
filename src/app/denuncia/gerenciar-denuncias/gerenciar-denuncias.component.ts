@@ -6,8 +6,7 @@ import { UsuarioService } from '../../shared/service/Usuario_service';
 
 @Component({
   selector: 'app-gerenciar-denuncias',
-  standalone: true,
-  imports: [],
+  standalone:false,
   templateUrl: './gerenciar-denuncias.component.html',
   styleUrl: './gerenciar-denuncias.component.scss'
 })
@@ -20,11 +19,11 @@ export class GerenciarDenunciasComponent {
     private route: ActivatedRoute,
     private loginService: LoginService,
     private usuarioService: UsuarioService,
-    
+
   ){}
 
   ngOnInit(): void {
-    
+
     this.buscarUsuarioAutenticado();
 
 
@@ -43,9 +42,9 @@ export class GerenciarDenunciasComponent {
   private buscarUsuarioAutenticado(): void {
 
     this.idUsuarioAutenticado = this.loginService.buscarIdUsuarioComToken();
-  
+
     if (this.idUsuarioAutenticado) {
-  
+
       this.usuarioService.buscarUsuarioPorId(this.idUsuarioAutenticado).subscribe(
         (resultado) => {
           this.usuarioAutenticado = resultado;

@@ -6,6 +6,5 @@ export class Denuncia{
   dataHoraDenuncia: Date;
   pruuId: string;
   usuarioId: string;
-  idSessao: string;
   situacao: EnumDenuncia;
 }

@@ -6,7 +6,6 @@ export class Pruu{
   dataHoraCriacao: Date;
   bloqueado: boolean;
   quantLikes: number;
-  idSessao: string;
   imagemPruuEmBase64: string;
   usuario: Usuario;
   usuariosQueCurtiram: Usuario[];

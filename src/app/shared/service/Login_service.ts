@@ -11,10 +11,10 @@ import {jwtDecode}  from 'jwt-decode';
 export class LoginService {
 
   //URL BackEnd Local
-  //private readonly API = 'http://localhost:8080/auth';
+  private readonly API = 'http://localhost:8080/auth';
 
   //URL BackEnd Remoto
-  private readonly API = 'https://projeto-pombo-backend.onrender.com/auth';
+  //private readonly API = 'https://projeto-pombo-backend.onrender.com/auth';
 
 
   constructor(private httpCliente: HttpClient) { }
