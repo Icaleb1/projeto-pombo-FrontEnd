@@ -27,6 +27,11 @@ export class DenunciaService {
 
   }
 
+  contarPaginas(seletor: Denuncia_seletor): Observable<number> {
+    return this.httpCliente.post<number>(this.API + '/total-paginas', seletor);
+  }
+
+
 
 
 }

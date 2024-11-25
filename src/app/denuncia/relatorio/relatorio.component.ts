@@ -91,7 +91,21 @@ export class RelatorioComponent implements OnInit{
     this.pesquisar();
   }
 
+  public contarPaginas() {
+    this.denunciaService.contarPaginas(this.seletor).subscribe(
+      resultado => {
+        this.totalPaginas = resultado;
+      },
+      erro => {
+        Swal.fire('Erro ao consultar total de paginas', erro.error, 'error');
+      }
+    );
+  }
 
+  atualizarPaginacao() {
+    this.contarPaginas();
+    this.pesquisar();
+  }
 
 
   public limpar(){
@@ -100,7 +114,7 @@ export class RelatorioComponent implements OnInit{
     this.seletor.pagina = 1;
   }
 
-  
+
 
   avancarPagina() {
     this.seletor.pagina++;
