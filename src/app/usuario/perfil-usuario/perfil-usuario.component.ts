@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../shared/model/Usuario';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EnumPerfil } from '../../shared/model/enum/EnumPerfil';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -79,5 +80,37 @@ export class PerfilUsuarioComponent implements OnInit{
       this.imagePreview = null;
     }
   }
-  
+
+  uploadImagem(): void {
+    const formData = new FormData();
+    formData.append('imagem', this.selectedFile!, this.selectedFile!.name);
+
+    this.usuarioService.uploadImagem(this.usuarioAutenticado.uuid, formData).subscribe({
+      next: () => {
+        Swal.fire('Imagem carregada com sucesso!', '', 'success');
+        this.voltar();
+      },
+      error: (erro) => {
+        Swal.fire('Erro ao fazer upload da imagem: ' + erro.error, 'error');
+      }
+    });
+  }
+
+  voltar(): void {
+    this.router.navigate(['/home']);
+  }
+
+  exibirImagemGrande(imagemBase64: string) {
+
+    console.log("123");
+    Swal.fire({
+      title: 'Imagem do Pruu',
+      html: `<img src="data:image/jpg;base64,${imagemBase64}" alt="Imagem do Pruu" style="max-width: 100%; height: auto;">`,
+      width: '80%',
+      showCloseButton: true,
+      showConfirmButton: false,
+      background: '#fff',
+      padding: '20px'
+    });
+  }
 }

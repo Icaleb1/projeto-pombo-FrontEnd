@@ -24,6 +24,9 @@ export class UsuarioService {
     return this.httpCliente.get<Usuario>(`${this.API}/${idUsuario}`);
   }
 
+  uploadImagem(usuarioId: string, formData: FormData): Observable<any> {
+    return this.httpCliente.post(`${this.API}/${usuarioId}/upload`, formData);
+  }
 
 
 }

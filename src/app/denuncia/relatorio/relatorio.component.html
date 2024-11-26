@@ -40,7 +40,8 @@
           {{usuarioAutenticado?.nome}}
         </span>
 
-        <img src="assets/images/Pru.png" alt="Perfil do Usuário" width="60" height="60" class="rounded-circle">
+        <img *ngIf="usuarioAutenticado.imagemUsuarioEmBase64" [src]="'data:image/jpeg;base64,' + usuarioAutenticado.imagemUsuarioEmBase64" alt=""
+        width="60" height="60" class="rounded-circle ms-2">
       </a>
     </div>
   </nav>
