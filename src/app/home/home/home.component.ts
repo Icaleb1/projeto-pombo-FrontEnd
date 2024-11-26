@@ -27,6 +27,7 @@ export class HomeComponent  implements OnInit{
   public totalPaginas: number = 0;
   public readonly TAMANHO_PAGINA: number = 3;
   public seletor: Pruu_seletor = new Pruu_seletor();
+  public usuarioDenunciante: Usuario;
 
   constructor(
     private pruuService: PruuService,
@@ -70,9 +71,6 @@ export class HomeComponent  implements OnInit{
       }
     );
   }
-
-
-
 
   public contarPaginas() {
     this.pruuService.contarPaginas(this.seletor).subscribe(

@@ -1,3 +1,4 @@
+import { Denuncia } from './../../shared/model/Denuncia';
 import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from '../../shared/model/Usuario';
@@ -5,7 +6,6 @@ import { LoginService } from '../../shared/service/Login_service';
 import { UsuarioService } from '../../shared/service/Usuario_service';
 import { DenunciaService } from '../../shared/service/denuncia_service';
 import { Denuncia_seletor } from '../../shared/model/seletor/denuncia_seletor';
-import { Denuncia } from '../../shared/model/Denuncia';
 import Swal from 'sweetalert2';
 import { Pruu } from '../../shared/model/Pruu';
 import { PruuService } from '../../shared/service/Pruu_service';
@@ -24,11 +24,14 @@ export class RelatorioComponent implements OnInit{
   public denuncias: Array<Denuncia> = new Array();
   public denuncia: Denuncia;
   public pruuDenunciado: Pruu;
+  public usuarioDenunciante: Usuario;
   track: TrackByFunction<Denuncia>;
-  trackPruu: TrackByFunction<Denuncia>;
+  trackDenuncia: TrackByFunction<Denuncia>;
   public totalPaginas: number = 0;
   public readonly TAMANHO_PAGINA: number = 3;
   public pruusMap: Map<string, Pruu> = new Map();
+  public usuariosMap: Map<string, Usuario> = new Map();
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -40,11 +43,11 @@ export class RelatorioComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-
+    this.seletor.limite = this.TAMANHO_PAGINA;
+    this.seletor.pagina = 1;
+    this.contarPaginas();
     this.buscarUsuarioAutenticado();
     this.pesquisar();
-
-
 
   }
   public telaPerfil(): void{
@@ -76,11 +79,28 @@ export class RelatorioComponent implements OnInit{
     }
   }
 
+  private carregarDenuciantes():void{
+      this.denuncias.forEach(denuncia => {
+      if (denuncia.usuarioId && !this.usuariosMap.has(denuncia.usuarioId)) {
+
+        this.usuarioService.buscarUsuarioPorId(denuncia.usuarioId).subscribe(
+          usuario => {
+            this.usuariosMap.set(denuncia.usuarioId, usuario);
+          },
+          erro => {
+            console.error(`Erro ao buscar Usuario com ID ${denuncia.usuarioId}:`, erro);
+          }
+        );
+      }
+    });
+  }
+
   public pesquisar() {
     this.denunciaService.buscarComSeletor(this.seletor).subscribe(
       resultado => {
         this.denuncias = resultado;
         this.carregarPruus();
+        this.carregarDenuciantes();
       },
       erro => {
         Swal.fire('Erro ao consultar denuncias!', erro.error, 'error');
@@ -136,8 +156,6 @@ export class RelatorioComponent implements OnInit{
     this.seletor.pagina = 1;
   }
 
-
-
   avancarPagina() {
     this.seletor.pagina++;
     this.pesquisar();
@@ -146,6 +164,20 @@ export class RelatorioComponent implements OnInit{
   voltarPagina() {
     this.seletor.pagina--;
     this.pesquisar();
+  }
+
+  exibirImagemGrande(imagemBase64: string) {
+
+    console.log("123");
+    Swal.fire({
+      title: 'Imagem do Pruu',
+      html: `<img src="data:image/jpg;base64,${imagemBase64}" alt="Imagem do Pruu" style="max-width: 100%; height: auto;">`,
+      width: '80%',
+      showCloseButton: true,
+      showConfirmButton: false,
+      background: '#fff',
+      padding: '20px'
+    });
   }
 
 }

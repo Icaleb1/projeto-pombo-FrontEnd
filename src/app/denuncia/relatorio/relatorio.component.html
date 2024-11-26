@@ -13,15 +13,15 @@
           <ul class="dropdown-menu p-3" style="min-width: 300px;">
             <li class="mb-2">
               <label for="startDate" class="form-label"><strong>Data Inicial</strong></label>
-              <input type="date" id="date" class="form-control border-1 border-dark" name="date" [(ngModel)]="seletor.dataInicioDenuncia" > 
+              <input type="date" id="date" class="form-control border-1 border-dark" name="date" [(ngModel)]="seletor.dataInicioDenuncia" >
             </li>
             <li class="mb-2">
               <label for="endDate" class="form-label"><strong>Data Final</strong></label>
-              <input type="date" id="date" class="form-control border-1 border-dark" name="date" [(ngModel)]="seletor.dataFimDenuncia"> 
+              <input type="date" id="date" class="form-control border-1 border-dark" name="date" [(ngModel)]="seletor.dataFimDenuncia">
             </li>
             <li class="mb-2">
               <label for="textFilter" class="form-label"><strong>Motivo:</strong></label>
-              <input type="text" id="text" class="form-control border-1 border-dark" name="text" placeholder="Pesquisar Assunto" [(ngModel)]="seletor.motivo"/> 
+              <input type="text" id="text" class="form-control border-1 border-dark" name="text" placeholder="Pesquisar Assunto" [(ngModel)]="seletor.motivo"/>
             </li>
             <li class="d-flex justify-content-between mt-1">
               <button type="button" class="btn btn-primary ms-2" name="btnLimpar" ><!--(click)="limpar()"-->
@@ -48,21 +48,21 @@
 
    <div class="d-flex justify-content-center mt-5 pt-6" >
     <div class="container pt-3">
-        <div class="row justify-content-center pt-3" *ngFor="let denuncia of denuncias; trackBy: trackPruu" >
+        <div class="row justify-content-center pt-3" *ngFor="let denuncia of denuncias; trackBy: trackDenuncia" >
           <div class="col-12 col-sm-6 col-md-4 pt-4">
-            <div class="card shadow-lg border-light p-3">
-              <div class="card-body" *ngIf="pruusMap.get(denuncia.pruuId) as pruu">
+            <div class="card shadow-lg border-light p-3" *ngIf="usuariosMap.get(denuncia.usuarioId) as usuario" >
+              <div class="card-body"  *ngIf="pruusMap.get(denuncia.pruuId) as pruu">
                 <p class="mb-2">
                   <strong>Motivo:</strong> <span>{{denuncia.motivo}}</span>
                 </p>
                 <p class="mb-2">
-                  <strong>Data:</strong> <span>{{denuncia.dataHoraDenuncia}}</span>
+                  <strong>Data:</strong> <span>{{denuncia.dataHoraDenuncia  | date:'dd/MM/yyyy'}}</span>
                 </p>
                 <p class="mb-2">
-                  <strong>Usuário Denunciado:</strong> <span>caleb</span>
+                  <strong>Usuário Denunciado:</strong> <span>{{pruu.usuario.nome}}</span>
                 </p>
                 <p class="mb-2">
-                    <strong>Usuário Denunciante:</strong> <span>caleb</span>
+                    <strong>Usuário Denunciante:</strong> <span>{{usuario.nome}}</span>
                   </p>
                 <p class="mb-2">
                   <strong>Situação:</strong> <span>{{denuncia.situacao}}</span>
@@ -75,7 +75,9 @@
 
                 </p>
                 {{pruu.texto}}
-                <img src="/assets/images/Pru.png" class="card-img-top rounded" alt="">
+                <img *ngIf="pruu.imagemPruuEmBase64" [src]="'data:image/jpeg;base64,' + pruu.imagemPruuEmBase64" alt="Imagem da Carta"
+                class="card-img-top rounded"
+                (click)="exibirImagemGrande(pruu.imagemPruuEmBase64)">
                 <div class="d-flex justify-content-between align-items-center pt-3">
                     <button class="btn btn-warning ms-auto" (click)="gerenciarDecunia()">
                       <i class="bi bi-eye"></i><strong>Detalhes</strong>
