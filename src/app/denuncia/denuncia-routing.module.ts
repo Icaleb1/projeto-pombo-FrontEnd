@@ -21,7 +21,7 @@ const routes: Routes = [
     path: 'relatorio', component: RelatorioComponent
   },
   {
-    path: 'gerenciar', component: GerenciarDenunciasComponent
+    path: 'gerenciar/:id', component: GerenciarDenunciasComponent
   }
   
 ];

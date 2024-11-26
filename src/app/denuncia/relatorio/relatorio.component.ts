@@ -56,8 +56,8 @@ export class RelatorioComponent implements OnInit{
   public telaHome(): void{
     this.router.navigate(['/home']);
   }
-  public gerenciarDecunia(): void{
-    this.router.navigate(['/denuncia/gerenciar']);
+  public gerenciarDenuncia(idDenunciaSelecionada: string): void{
+    this.router.navigate(['/denuncia/gerenciar/', idDenunciaSelecionada]);
   }
 
   private buscarUsuarioAutenticado(): void {

@@ -10,10 +10,10 @@ import { Pruu_seletor } from '../model/seletor/pruu_seletor';
 export class PruuService {
 
   //URL BackEnd Local
-  //private readonly API = 'http://localhost:8080/api/pruus';
+  private readonly API = 'http://localhost:8080/api/pruus';
 
   //URL BackEnd Remoto
-  private readonly API = 'https://projeto-pombo-backend.onrender.com/api/pruus';
+  //private readonly API = 'https://projeto-pombo-backend.onrender.com/api/pruus';
 
 
   constructor(private httpCliente: HttpClient) { }
@@ -50,11 +50,10 @@ export class PruuService {
     return this.httpCliente.put<any>(this.API + "/deletar/", idPruu);
   }
 
-  public bloquearPruuPorId(idPruu: string):
-  Observable<any>{
-    return this.httpCliente.put<any>(this.API + "/bloquear/", idPruu);
+  public bloquearPruuPorId(idPruu: string): Observable<any> {
+    return this.httpCliente.put<any>(`${this.API}/bloquear/${idPruu}`, null);
   }
-
+  
   public buscarPruuPorId(idPruu: string): Observable<Pruu> {
     return this.httpCliente.get<Pruu>(`${this.API}/${idPruu}`);
   }

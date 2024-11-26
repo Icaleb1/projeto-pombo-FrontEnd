@@ -23,13 +23,16 @@
               </a>
             </div>
             <h4 class="text-center mb-4"><strong>Gerenciando Denúncia</strong></h4>
-          preto
-          <img src="/assets/images/Pru.png" class="card-img-top rounded" alt="">
+          {{denuncia.motivo}}
+          <img *ngIf="pruuDenunciado.imagemPruuEmBase64" [src]="'data:image/jpeg;base64,' + pruuDenunciado.imagemPruuEmBase64" alt="Imagem da Carta"
+          class="card-img-top rounded"
+          (click)="exibirImagemGrande(pruuDenunciado.imagemPruuEmBase64)">
+
             <div class="d-flex justify-content-between align-items-center pt-3">
               <p><strong>Status:</strong></p>
-              <p>Pendente</p>
-              <button class="btn btn-danger d-flex align-items-center ms-auto">
-                <i class="bi bi-lock-fill me-2"></i>
+              <p>{{denuncia.situacao}}</p>
+              <button class="btn btn-danger d-flex align-items-center ms-auto" (click)="bloquearPruu()">
+                <i class="bi bi-lock-fill me-2" ></i>
                 <strong>Bloquear Pru</strong>
               </button>
             </div>

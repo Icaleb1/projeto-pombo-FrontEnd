@@ -53,7 +53,7 @@ export class HomeComponent  implements OnInit{
   public pesquisar() {
     this.pruuService.buscarComSeletor(this.seletor).subscribe(
       resultado => {
-        this.pruus = resultado;
+        this.pruus = resultado.filter(pruu => pruu.ativo && !pruu.bloqueado);
       },
       erro => {
         Swal.fire('Erro ao consultar pruus!', erro.error, 'error');
