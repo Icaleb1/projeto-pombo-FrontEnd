@@ -65,14 +65,13 @@
                     <strong>Usuário Denunciante:</strong> <span>{{usuario.nome}}</span>
                   </p>
                 <p class="mb-2">
-                  <strong>Situação:</strong> <span>{{denuncia.situacao}}</span>
+                  <strong>Situação:</strong><span>{{denuncia.situacao}}</span>
                 </p>
                 <p class="mb-2">
                     <strong>Pruu Denunciado:</strong>
                 </p>
                 <p class="mb-2">
                     <strong>Texto:</strong>
-
                 </p>
                 {{pruu.texto}}
                 <img *ngIf="pruu.imagemPruuEmBase64" [src]="'data:image/jpeg;base64,' + pruu.imagemPruuEmBase64" alt="Imagem da Carta"
