@@ -1,9 +1,12 @@
-import { Route, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { routes } from './../../app.routes';
 import { PruuService } from './../../shared/service/Pruu_service';
 import { Component } from '@angular/core';
 import { Pruu } from '../../shared/model/Pruu';
 import Swal from 'sweetalert2';
+import { Usuario } from '../../shared/model/Usuario';
+import { UsuarioService } from '../../shared/service/Usuario_service';
+import { LoginService } from '../../shared/service/Login_service';
 
 @Component({
   selector: 'app-pru-cadastro',
@@ -16,13 +19,24 @@ export class PruCadastroComponent {
   public pruu: Pruu = new Pruu();
   public selectedFile: File | null = null;
   public imagePreview: string | ArrayBuffer | null = null;
-
+  public usuarioAutenticado: Usuario;
+  public idUsuarioAutenticado: string;
 
   constructor(
     private pruuService: PruuService,
     private router: Router,
+    private route: ActivatedRoute,
+    private loginService: LoginService,
+    private usuarioService: UsuarioService,
 
   ){}
+  ngOnInit(): void {
+
+    this.buscarUsuarioAutenticado();
+
+
+
+  }
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -82,5 +96,22 @@ export class PruCadastroComponent {
   voltar(): void {
     this.router.navigate(['/home']);
   }
+  private buscarUsuarioAutenticado(): void {
 
+    this.idUsuarioAutenticado = this.loginService.buscarIdUsuarioComToken();
+
+    if (this.idUsuarioAutenticado) {
+
+      this.usuarioService.buscarUsuarioPorId(this.idUsuarioAutenticado).subscribe(
+        (resultado) => {
+          this.usuarioAutenticado = resultado;
+        },
+        (erro) => {
+          console.error('Erro ao carregar perfil!', erro);
+        }
+      );
+    } else {
+      console.error('Usuário não autenticado ou token inválido.');
+    }
+  }
 }

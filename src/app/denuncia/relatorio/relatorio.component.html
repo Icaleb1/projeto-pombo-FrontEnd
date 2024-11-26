@@ -6,22 +6,22 @@
       </a>
       <div class="position-relative mx-auto">
         <div class="input-group">
-          <input type="text" id="text" class="form-control border-1 border-dark" style="max-width: 600px; margin: 0 auto;"  name="text"  placeholder="Pesquisar Usuário" [(ngModel)]="seletor.nomeUsuario"/> <!--[(ngModel)]="seletor.nomeUsuario"-->
+          <input type="text" id="text" class="form-control border-1 border-dark" style="max-width: 600px; margin: 0 auto;"  name="text"  placeholder="Pesquisar Usuário" [(ngModel)]="seletor.nomeUsuario"/>
           <button class="btn btn-warning  dropdown-toggle border-1 border-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <strong class="text-dark">Filtros</strong>
           </button>
           <ul class="dropdown-menu p-3" style="min-width: 300px;">
             <li class="mb-2">
               <label for="startDate" class="form-label"><strong>Data Inicial</strong></label>
-              <input type="date" id="date" class="form-control border-1 border-dark" name="date" [(ngModel)]="seletor.dataInicioDenuncia" > <!--[(ngModel)]="seletor.dataInicioCriacao"-->
+              <input type="date" id="date" class="form-control border-1 border-dark" name="date" [(ngModel)]="seletor.dataInicioDenuncia" > 
             </li>
             <li class="mb-2">
               <label for="endDate" class="form-label"><strong>Data Final</strong></label>
-              <input type="date" id="date" class="form-control border-1 border-dark" name="date" [(ngModel)]="seletor.dataFimDenuncia"> <!--[(ngModel)]="seletor.dataFimCriacao"-->
+              <input type="date" id="date" class="form-control border-1 border-dark" name="date" [(ngModel)]="seletor.dataFimDenuncia"> 
             </li>
             <li class="mb-2">
-              <label for="textFilter" class="form-label"><strong>Assunto</strong></label>
-              <input type="text" id="text" class="form-control border-1 border-dark" name="text" placeholder="Pesquisar Assunto" [(ngModel)]="seletor.motivo"/> <!--[(ngModel)]="seletor.texto" -->
+              <label for="textFilter" class="form-label"><strong>Motivo:</strong></label>
+              <input type="text" id="text" class="form-control border-1 border-dark" name="text" placeholder="Pesquisar Assunto" [(ngModel)]="seletor.motivo"/> 
             </li>
             <li class="d-flex justify-content-between mt-1">
               <button type="button" class="btn btn-primary ms-2" name="btnLimpar" ><!--(click)="limpar()"-->
@@ -48,7 +48,7 @@
 
    <div class="d-flex justify-content-center mt-5 pt-6" >
     <div class="container pt-3">
-        <div class="row justify-content-center pt-3" *ngFor="let denuncia of denuncias; trackBy: trackPruu" ><!-- *ngFor="let pruu of pruus; trackBy: trackPruu" -->
+        <div class="row justify-content-center pt-3" *ngFor="let denuncia of denuncias; trackBy: trackPruu" >
           <div class="col-12 col-sm-6 col-md-4 pt-4">
             <div class="card shadow-lg border-light p-3">
               <div class="card-body">
@@ -89,23 +89,23 @@
       <br>
       <nav class="row bg-white py-3 rounded-3 justify-content-center pt-3" style="max-width: 600px; margin: 0 auto;">
         <div class="col-md-4 mb-3 mb-md-0" style="width: 424px;">
-          <label for="quantidadeRegistros" class="form-label"><strong>Total de Pruus por página:</strong></label>
+          <label for="quantidadeRegistros" class="form-label"><strong>Total de denuncias por página:</strong></label>
           <div class="d-flex">
-            <select class="form-select border-1 border-dark" ><!--[(ngModel)]="seletor.limite" (change)="atualizarPaginacao()"-->
+            <select class="form-select border-1 border-dark" [(ngModel)]="seletor.limite" (change)="atualizarPaginacao()">
               <option value="3">3</option>
               <option value="6">6</option>
               <option value="20">20</option>
             </select>
-           <!-- <button [disabled]="seletor.pagina == 1" class="btn btn-warning ms-2" (click)="voltarPagina()"><strong>Anterior</strong></button>-->
-             <!-- <button [disabled]="seletor.pagina == totalPaginas" class="btn btn-warning ms-2" (click)="avancarPagina()"><strong>Próxima</strong></button>-->
+             <button [disabled]="seletor.pagina == 1" class="btn btn-warning ms-2" (click)="voltarPagina()"><strong>Anterior</strong></button>
+            <button [disabled]="seletor.pagina == totalPaginas" class="btn btn-warning ms-2" (click)="avancarPagina()"><strong>Próxima</strong></button>
           </div>
         </div>
 
         <div class="col-md-4 d-flex align-items-center pt-2">
           <ul class="pagination justify-content-center mb-0 w-100">
-            <li class="page-item " ><!--(click)="irParaPagina(indice)"-->
+            <li class="page-item " *ngFor="let indice of criarArrayPaginas()" (click)="irParaPagina(indice)">
               <button class="page-link text-dark border-1 border-warning">
-              <strong>sla</strong></button>
+              <strong>{{indice}}</strong></button>
             </li>
           </ul>
         </div>
