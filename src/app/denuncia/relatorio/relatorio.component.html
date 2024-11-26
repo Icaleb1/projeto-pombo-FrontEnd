@@ -6,7 +6,7 @@
       </a>
       <div class="position-relative mx-auto">
         <div class="input-group">
-          <input type="text" id="text" class="form-control border-1 border-dark" style="max-width: 600px; margin: 0 auto;"  name="text"  placeholder="Pesquisar Usuário" [(ngModel)]="seletor.nomeUsuario"/>
+          <input type="text" id="text" class="form-control border-1 border-dark" style="max-width: 1000px; margin: 0 auto;"  name="text"  placeholder="Pesquisar Denunciante" [(ngModel)]="seletor.nomeUsuario"/>
           <button class="btn btn-warning  dropdown-toggle border-1 border-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <strong class="text-dark">Filtros</strong>
           </button>
@@ -24,7 +24,7 @@
               <input type="text" id="text" class="form-control border-1 border-dark" name="text" placeholder="Pesquisar Assunto" [(ngModel)]="seletor.motivo"/>
             </li>
             <li class="d-flex justify-content-between mt-1">
-              <button type="button" class="btn btn-primary ms-2" name="btnLimpar" ><!--(click)="limpar()"-->
+              <button type="button" class="btn btn-primary ms-2" name="btnLimpar" (click)="limpar()" ><!--(click)="limpar()"-->
                 <i class="bi bi-trash"></i><strong>Limpar</strong>
               </button>
               <button type="button" class="btn btn-warning" name="btnPesquisar" (click)="pesquisar()"><!--(click)="pesquisar()"-->

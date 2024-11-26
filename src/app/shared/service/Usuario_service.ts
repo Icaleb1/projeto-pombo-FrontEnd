@@ -9,10 +9,10 @@ import { Usuario } from "../model/Usuario";
 export class UsuarioService {
 
   //URL BackEnd Local
-  private readonly API = 'http://localhost:8080/api/usuarios';
+  //private readonly API = 'http://localhost:8080/api/usuarios';
 
   //URL BackEnd Remoto
-  //private readonly API = 'https://projeto-pombo-backend.onrender.com/api/usuarios';
+  private readonly API = 'https://projeto-pombo-backend.onrender.com/api/usuarios';
 
   constructor(private httpCliente: HttpClient) {}
 
