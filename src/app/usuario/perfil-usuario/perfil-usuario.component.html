@@ -29,12 +29,13 @@
       <div class="mb-3 text-center">
         <label for="imagem" class="form-label"><strong>Adicionar Foto de Perfil</strong></label>
         <div class="position-relative">
-          <input type="file" id="imagem" class="form-control-file position-absolute w-100 h-100 opacity-0" accept="image/*" (change)="onFileSelected($event)">
-          <button class="btn btn-light border-1 border-dark rounded-circle p-4" style="width: 125px; height: 125px;">
-            <i class="bi bi-image">
-              <p class="pl-3">Definir</p>
-            </i>
-          </button>
+          <div class="d-flex justify-content-center">
+            <input type="file" id="imagem" class="form-control-file position-absolute w-100 h-100 opacity-0" accept="image/*" (change)="onFileSelected($event)">
+              <img *ngIf="usuarioAutenticado.imagemUsuarioEmBase64" [src]="'data:image/jpeg;base64,' + usuarioAutenticado.imagemUsuarioEmBase64" alt="" width="125" height="125" class="rounded-circle ms-2 border-1 border-dark">
+              <div *ngIf="!usuarioAutenticado.imagemUsuarioEmBase64" class="rounded-circle bg-light d-flex align-items-center justify-content-center border border-dark" style="width: 125px; height: 125px;">
+              <span class="text-secondary">+</span>
+            </div>
+         </div>
         </div>
       </div>
       <div class="d-flex flex-column align-items-center">
