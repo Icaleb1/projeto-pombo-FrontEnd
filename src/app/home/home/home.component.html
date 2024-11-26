@@ -60,7 +60,7 @@
       <div class="col-12 col-sm-6 col-md-4">
         <div class="card shadow-lg border-light p-3" >
           <div class="d-flex align-items-center ">
-            <img src="assets/images/Pru.png" alt="Imagem de Perfil" width="40" height="40" class="rounded-circle me-3">
+            <img *ngIf="usuarioAutenticado.imagemUsuarioEmBase64" [src]="'data:image/jpeg;base64,' + usuarioAutenticado.imagemUsuarioEmBase64" class="rounded-circle me-3">
             <div>
               <span class="fw-bold d-block">{{ pruu.usuario.nome }}</span>
               <small class="text-muted d-block">{{ pruu.dataHoraCriacao | date:'dd/MM/yyyy' }}</small>
