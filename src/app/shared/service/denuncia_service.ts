@@ -10,10 +10,10 @@ import { Denuncia_seletor } from "../model/seletor/denuncia_seletor";
 export class DenunciaService {
 
   //URL BackEnd Local
-  private readonly API = 'http://localhost:8080/api/denuncias';
+  //private readonly API = 'http://localhost:8080/api/denuncias';
 
   //URL BackEnd Remoto
-  //private readonly API = 'https://projeto-pombo-backend.onrender.com/api/denuncias';
+  private readonly API = 'https://projeto-pombo-backend.onrender.com/api/denuncias';
 
 
   constructor(private httpCliente: HttpClient) {}

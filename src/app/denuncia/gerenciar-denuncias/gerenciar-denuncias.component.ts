@@ -25,9 +25,6 @@ export class GerenciarDenunciasComponent {
   ngOnInit(): void {
 
     this.buscarUsuarioAutenticado();
-
-
-
   }
   public telaPerfil(): void{
     this.router.navigate(['/home/usuario']);

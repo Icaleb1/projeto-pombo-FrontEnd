@@ -7,6 +7,8 @@ import { DenunciaService } from '../../shared/service/denuncia_service';
 import { Denuncia_seletor } from '../../shared/model/seletor/denuncia_seletor';
 import { Denuncia } from '../../shared/model/Denuncia';
 import Swal from 'sweetalert2';
+import { Pruu } from '../../shared/model/Pruu';
+import { PruuService } from '../../shared/service/Pruu_service';
 
 @Component({
   selector: 'app-relatorio',
@@ -21,16 +23,19 @@ export class RelatorioComponent implements OnInit{
   public seletor: Denuncia_seletor = new Denuncia_seletor();
   public denuncias: Array<Denuncia> = new Array();
   public denuncia: Denuncia;
+  public pruuDenunciado: Pruu;
   track: TrackByFunction<Denuncia>;
   trackPruu: TrackByFunction<Denuncia>;
   public totalPaginas: number = 0;
   public readonly TAMANHO_PAGINA: number = 3;
+  public pruusMap: Map<string, Pruu> = new Map();
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private loginService: LoginService,
     private usuarioService: UsuarioService,
     private denunciaService: DenunciaService,
+    private pruuService: PruuService,
 
   ){}
 
@@ -75,11 +80,28 @@ export class RelatorioComponent implements OnInit{
     this.denunciaService.buscarComSeletor(this.seletor).subscribe(
       resultado => {
         this.denuncias = resultado;
+        this.carregarPruus();
       },
       erro => {
         Swal.fire('Erro ao consultar denuncias!', erro.error, 'error');
       }
     );
+  }
+
+  private carregarPruus(): void {
+    this.denuncias.forEach(denuncia => {
+      if (denuncia.pruuId && !this.pruusMap.has(denuncia.pruuId)) {
+        // Evita duplicar chamadas para o mesmo ID
+        this.pruuService.buscarPruuPorId(denuncia.pruuId).subscribe(
+          pruu => {
+            this.pruusMap.set(denuncia.pruuId, pruu);
+          },
+          erro => {
+            console.error(`Erro ao buscar Pruu com ID ${denuncia.pruuId}:`, erro);
+          }
+        );
+      }
+    });
   }
 
   criarArrayPaginas(): any[] {
